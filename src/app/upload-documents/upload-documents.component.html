@@ -1,7 +1,18 @@
+<div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+</div>
 <div class="container">
     <div class="row">
+        <div class="col-12">
+            <h1 class="text-center mt-3">Upload Documents</h1>
+        </div>
         <div class="col">
-            <h1 class="text-center mt-3">Upload documents</h1>
+            <div class="input-group mb-3">
+                <input type="file" class="form-control" id="inputGroupFile02" (change)="saveFile($event)">
+            </div>
+        </div>
+        <div class="col-12 text-center">
+            <button class="btn btn-primary" (click)="uploadFile()" [disabled]="!file">Upload</button>
         </div>
     </div>
 </div>

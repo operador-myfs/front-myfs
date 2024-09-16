@@ -7,6 +7,12 @@
         <div class="col">
             <h1 class="text-center mt-3">My Documents</h1>
         </div>
+        <div class="col-12 mt-3">
+            <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search documents..." (change)="saveSearchDocument($event)" >
+                <button class="btn btn-primary" type="button" (click)="getDocument()"  [disabled]="!saveDocument">Search</button>
+            </div>
+        </div>
         <div class="col-12">
             <table class="table table-striped mt-3">
                 <thead>

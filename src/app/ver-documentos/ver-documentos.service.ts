@@ -17,4 +17,9 @@ export class VerDocumentosService {
   deleteDocument(id: string) {
     return this.http.delete<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + id);
   } 
+
+  getDocument(id: string) {
+    return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + id);
+  }
+  
 }

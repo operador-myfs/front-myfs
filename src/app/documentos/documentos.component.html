@@ -1,24 +1,32 @@
 <div class="container d-flex justify-content-center align-items-center myfs-container ">
-    <div class="card">
-        <div class="card-header">
-            My Documents
+   <div class="row">
+    <div class="col-12">
+        <h1 class="text-center">Manage Documents</h1>
+    </div>
+    <div class="col">
+        <div class="card mt-3">
+            <div class="card-header">
+                My Documents
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Visualize your Documents</h5>
+                <p class="card-text">Here you can view your documents. Please browse through the list of documents
+                    available.</p>
+                <a [routerLink]="['/my-documents']" class="btn btn-primary">View Documents</a>
+            </div>
         </div>
-        <div class="card-body me-2">
-            <h5 class="card-title">Visualize your Documents</h5>
-            <p class="card-text">Here you can view your documents. Please browse through the list of documents
-                available.</p>
-            <a [routerLink]="['/my-documents']" class="btn btn-primary">View Documents</a>
+        <div class="card mt-3">
+            <div class="card-header">
+                Upload Documents
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Upload Your Documents</h5>
+                <p class="card-text">Here you can upload your documents. Please select the files you want to upload and
+                    click the upload button.</p>
+                <a [routerLink]="['/upload-documents']" class="btn btn-primary">Upload documents</a>
+            </div>
         </div>
     </div>
-    <div class="card ms-2">
-        <div class="card-header">
-            Upload Documents
-        </div>
-        <div class="card-body">
-            <h5 class="card-title">Upload Your Documents</h5>
-            <p class="card-text">Here you can upload your documents. Please select the files you want to upload and
-                click the upload button.</p>
-            <a [routerLink]="['/upload-documents']" class="btn btn-primary">Upload documents</a>
-        </div>
-    </div>
+   </div>
+ 
 </div>
