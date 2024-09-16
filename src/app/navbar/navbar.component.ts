@@ -16,19 +16,10 @@ export class NavbarComponent {
 
   logOut() {
     this.loginService.setLoggedIn(false);
-    this.router.navigate(['login'])
-  }
-  navigate(event: number) {
-    switch (event) {
-      case 1:
-        this.router.navigate(['home']);
-        break;
-      case 2:
-        this.router.navigate(['documents']);
-        break;
-      default:
-        break;
+    if (sessionStorage.getItem('userSession')) {
+      sessionStorage.removeItem('userSession');
     }
-    this.router.navigate(['home']);
+    this.router.navigate(['login']);
   }
+ 
 }

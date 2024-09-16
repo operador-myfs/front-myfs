@@ -14,6 +14,10 @@ export class LoginService {
     return this.loggedIn$.asObservable();
   }
   setLoggedIn(value: boolean): void {
+    sessionStorage.setItem('userSession', JSON.stringify({
+      state:true.toString(),
+      time: new Date().getTime()
+    }));
     this.loggedIn$.next(value);
   }
   

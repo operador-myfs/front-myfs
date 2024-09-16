@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { authGuard } from './guards/auth.guard';
 import { DocumentosComponent } from './documentos/documentos.component';
 import { VerDocumentosComponent } from './ver-documentos/ver-documentos.component';
+import { UploadDocumentsComponent } from './upload-documents/upload-documents.component';
 
 export const routes: Routes = [
     {
@@ -18,19 +19,17 @@ export const routes: Routes = [
     },
     {
         path: 'documents', component: DocumentosComponent, canActivate: [authGuard],
-        children: [
-            {
-                path: 'my-documents', component: VerDocumentosComponent
-            }
-        ]
+
+    },
+    {
+        path: 'upload-documents', component: UploadDocumentsComponent , canActivate: [authGuard]
     },
     {
         path: 'my-documents', component: VerDocumentosComponent, canActivate: [authGuard]
     },
     {
-        path: '', redirectTo: '/error', pathMatch: 'full'
+        path: '', redirectTo: '/home', pathMatch: 'full'
     },
     {
-        path: '**', redirectTo: '/error', pathMatch: 'full'
-    }
+        path: '**', redirectTo: '/error'}
 ];

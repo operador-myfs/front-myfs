@@ -1,2 +1,45 @@
-<p>ver-documentos works!</p>
-<h1>hola</h1>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mt-3">My Documents</h1>
+        </div>
+        <div class="col-12">
+            <table class="table table-striped mt-3">
+                <thead>
+                    <tr>
+
+                        <th scope="col">#</th>
+                        <th scope="col">Document Name</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Verified</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @for (document of documents; track document.uuid; let i= $index) {
+                    <tr>
+                        <td>{{ i+1 }}</td>
+                        <td>{{ document.fileName }}</td>
+                        <td>{{ document.createdAt |date }}</td>
+                        @if(document.isAuthenticated){
+                        <td>Yes</td>
+                        } @else {
+                        <td>No</td>
+                        }
+                        <td>
+                            <button class="btn btn-primary btn-sm mx-2"><i class="fa-solid fa-check"></i></button>
+                            <button class="btn btn-danger btn-sm" (click)="removeDocument(document.id)"><i
+                                    class="fa-solid fa-trash"></i></button>
+                        </td>
+                    </tr>
+                    } @empty {
+
+                    There are no documents.
+
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
