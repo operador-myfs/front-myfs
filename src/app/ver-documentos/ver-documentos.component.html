@@ -1,4 +1,8 @@
-<div class="container">
+<div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+
+<div class="container" *ngIf="!isLoading">
     <div class="row">
         <div class="col">
             <h1 class="text-center mt-3">My Documents</h1>
