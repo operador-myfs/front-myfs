@@ -59,4 +59,13 @@ export class VerDocumentosComponent {
       this.isLoading = false;
     });
   }
+  seeDocument(event:string){
+    this.isLoading = true;
+    this.documentService.seeDocumentPreSignedUrl(event).subscribe((data) => {
+      if(!data.error){
+        window.open(data.body,'_blank');
+        this.isLoading = false;
+      }
+    })
+  }
 }

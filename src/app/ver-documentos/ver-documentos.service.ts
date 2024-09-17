@@ -21,5 +21,7 @@ export class VerDocumentosService {
   getDocument(id: string) {
     return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + id);
   }
-  
+  seeDocumentPreSignedUrl(key: string) {
+    return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + key + '/url');
+  }
 }

@@ -6,6 +6,7 @@ import { authGuard } from './guards/auth.guard';
 import { DocumentosComponent } from './documentos/documentos.component';
 import { VerDocumentosComponent } from './ver-documentos/ver-documentos.component';
 import { UploadDocumentsComponent } from './upload-documents/upload-documents.component';
+import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
     {
@@ -18,8 +19,10 @@ export const routes: Routes = [
         path: 'home', component: HomeComponent, canActivate: [authGuard]
     },
     {
+        path: 'register', component: RegisterComponent, 
+    },
+    {
         path: 'documents', component: DocumentosComponent, canActivate: [authGuard],
-
     },
     {
         path: 'upload-documents', component: UploadDocumentsComponent , canActivate: [authGuard]
