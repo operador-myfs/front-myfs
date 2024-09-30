@@ -15,7 +15,7 @@ export const authGuard: CanActivateFn = (route, state) => {
         const userSession = JSON.parse(storage);
         if (userSession.time > new Date().getTime() - 3600000) {
           if (userSession.state === 'true') {
-            loginService.setLoggedIn(true);
+            
             resolve(true);
           } 
         } else {
