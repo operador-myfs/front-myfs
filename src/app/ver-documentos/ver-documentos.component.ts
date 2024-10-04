@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { VerDocumentosService } from './ver-documentos.service';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { error } from 'console';
 
 @Component({
   selector: 'app-ver-documentos',
@@ -31,6 +32,9 @@ export class VerDocumentosComponent {
     this.documentService.getDocuments().subscribe((data) => {
       this.documents = data.body;
       this.isLoading = false;
+    },error=> {
+      this.isLoading = false;
+      this.toastr.error('An error occurred while trying to get the documents');
     });
   }
   getDocument() {

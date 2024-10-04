@@ -9,6 +9,8 @@ import {
 import { regexPassowrd } from '../utils/const';
 import { ConfirmatioEmailService } from './confirmatio-email.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LoginService } from '../login/login.service';
 
 @Component({
   selector: 'app-confirmation-email',
@@ -21,6 +23,9 @@ export class ConfirmationEmailComponent {
   public showPassword: boolean = false;
   private confirmationService = inject(ConfirmatioEmailService);
   private router = inject(Router);
+  private toastr = inject(ToastrService);
+  private loginService = inject(LoginService);
+  isLoading: boolean = false;
   confirmationForm = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -35,6 +40,7 @@ export class ConfirmationEmailComponent {
     ]),
   });
   confirmationLogin() {
+    this.isLoading = true;
     const bodyConfirmationLogin = {
       username: this.confirmationForm.value.email,
       password: this.confirmationForm.value.password,
@@ -43,14 +49,25 @@ export class ConfirmationEmailComponent {
     
     this.confirmationService
       .confirmationEmail(bodyConfirmationLogin)
-      .subscribe((response) => {
-        console.log(response);
+      .subscribe((data:any) => {
+        this.isLoading = false;
+        const idToken = data.id_token;
+        this.loginService.setIdToken(idToken);
+        sessionStorage.setItem('idToken', idToken);
+        this.loginService.setLoggedIn(true);
         this.router.navigate(['/home']);
+
+      },error => {
+        this.toastr.error('We could not create your password, please try again');
+        this.isLoading = false;
 
       });
   }
 
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
+  }
+  login() {
+    this.router.navigate(['login']);
   }
 }

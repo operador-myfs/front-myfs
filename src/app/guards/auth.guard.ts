@@ -10,32 +10,27 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   return new Promise<boolean>((resolve) => {
     if (typeof window !== 'undefined') {
-      const storage = sessionStorage.getItem('userSession');
-      if (storage) {
-        const userSession = JSON.parse(storage);
-        if (userSession.time > new Date().getTime() - 3600000) {
-          if (userSession.state === 'true') {
-            
-            resolve(true);
-          } 
-        } else {
-          
-          loginService.setLoggedIn(false);
-            toastr.error('Please log in again', 'Your session has expired!');
-          router.navigate(['login']);
-          resolve(false);
-        }
+      const token =
+        loginService.getIdToken() || sessionStorage.getItem('idToken');
+    
+      if (token ) {
+        loginService.setIdToken(token);
+        loginService.setLoggedIn(true);
+        resolve(true);
       } else {
         loginService.isLoggedIn().subscribe((resp) => {
           if (resp) {
             resolve(true);
           } else {
+            sessionStorage.removeItem('idToken');
             router.navigate(['login']);
             resolve(false);
           }
         });
       }
     } else {
+      sessionStorage.removeItem('idToken');
+      router.navigate(['login']);
       resolve(false);
     }
   });

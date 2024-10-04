@@ -17,4 +17,5 @@ export class AppComponent {
   title = 'myfs';
   private loginService = inject(LoginService);
   isLoggedIn$: Observable<boolean> = this.loginService.isLoggedIn();
+  
 }

@@ -1,3 +1,7 @@
+<div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+
 <div class="container d-flex justify-content-center align-items-center login-container">
     <form action="" [formGroup]="registerForm" (ngSubmit)="register()" class="w-100" style="max-width: 700px;">
         <h1 class="text-center">Myfs</h1>
@@ -10,6 +14,24 @@
                 <div *ngIf="registerForm.get('email')?.invalid && registerForm.get('email')?.touched"
                     class="fs-7 text-danger my-2">
                     The email must be valid
+                </div>
+            </div>
+            <div class="col-12 my-2">
+                <label for="formGroupidDocumentInputLogin" class="form-label">Document number</label>
+                <input formControlName="idDocument" type="text" class="form-control" id="formGroupidDocumentlInputLogin" maxlength="10"
+                    placeholder="Document number">
+                <div *ngIf="registerForm.get('idDocument')?.invalid && registerForm.get('idDocument')?.touched"
+                    class="fs-7 text-danger my-2">
+                    The document don't be empty
+                </div>
+            </div>
+            <div class="col-12 my-2">
+                <label for="formGroupAddressInputLogin" class="form-label">Address</label>
+                <input formControlName="address" type="text" class="form-control" id="formGroupAddresslInputLogin"
+                    placeholder="Address">
+                <div *ngIf="registerForm.get('address')?.invalid && registerForm.get('address')?.touched"
+                    class="fs-7 text-danger my-2">
+                    The Address don't be empty
                 </div>
             </div>
             <div class="col-12 my-2">

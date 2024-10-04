@@ -3,9 +3,10 @@ export interface DataLogin {
     password: any
 }
 export interface DataRegister {
-    email: string | undefined | null;
     name: string | undefined | null;
     username: string | undefined | null;
+    cedula: string | undefined | null;
+    address: string | undefined | null;
 }
 export interface ConfirmationEmail {
     username: string | undefined | null;

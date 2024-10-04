@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
+import { LoginService } from '../login/login.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,19 +10,30 @@ export class VerDocumentosService {
 
   private http = inject(HttpClient);
   private environment = environment; 
-  constructor() { }
-
+  private loginService = inject(LoginService);
   getDocuments() {
-    return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents);
+    const idToken = this.loginService.getIdToken() || '';
+    let headers =  new HttpHeaders()
+    .set('Authorization', `Bearer ${idToken}`)
+    return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents, { headers });
   }
   deleteDocument(id: string) {
-    return this.http.delete<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + id);
+    const idToken = this.loginService.getIdToken() || '';
+    let headers =  new HttpHeaders()
+    .set('Authorization', `Bearer ${idToken}`)
+    return this.http.delete<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + id, {headers});
   } 
 
   getDocument(id: string) {
-    return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + id);
+    const idToken = this.loginService.getIdToken() || '';
+    let headers =  new HttpHeaders()
+    .set('Authorization', `Bearer ${idToken}`)
+    return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + id, {headers});
   }
   seeDocumentPreSignedUrl(key: string) {
-    return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + key + '/url');
+    const idToken = this.loginService.getIdToken() || '';
+    let headers =  new HttpHeaders()
+    .set('Authorization', `Bearer ${idToken}`)
+    return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + key + '/url',{headers});
   }
 }

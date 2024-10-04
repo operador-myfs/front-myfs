@@ -16,9 +16,9 @@ export class NavbarComponent {
 
   logOut() {
     this.loginService.setLoggedIn(false);
-    if (sessionStorage.getItem('userSession')) {
-      sessionStorage.removeItem('userSession');
-    }
+    sessionStorage.removeItem('userSession');
+    sessionStorage.removeItem('idToken');
+    sessionStorage.removeItem('access_token');
     this.router.navigate(['login']);
   }
  

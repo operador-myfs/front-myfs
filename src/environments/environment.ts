@@ -3,6 +3,7 @@ export const environment = {
     urlUsuarios: 'http://localhost:8080/',
     documentsEndpoints: {
         documents: 'document',
+        operators: 'operators',
 
     },
     usuariosEndpoints: {
@@ -13,5 +14,8 @@ export const environment = {
             forgotPassoword: 'change-password'
         }
 
+    },
+    govCarpeta: {
+        getOperators:'http://localhost:8000/operators'
     }
 }

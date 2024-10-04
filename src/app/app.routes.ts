@@ -9,6 +9,8 @@ import { UploadDocumentsComponent } from './upload-documents/upload-documents.co
 import { RegisterComponent } from './register/register.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { ConfirmationEmailComponent } from './confirmation-email/confirmation-email.component';
+import { TransfersComponent } from './transfers/transfers.component';
+import { TransferOptionsComponent } from './transfer-options/transfer-options.component';
 
 export const routes: Routes = [
     {
@@ -26,11 +28,15 @@ export const routes: Routes = [
     {
         path: 'confirmation', component: ConfirmationEmailComponent,
     },
-     {
-        path: 'restore-password', component: ForgotPasswordComponent,
-    },
+    
     {
         path: 'documents', component: DocumentosComponent, canActivate: [authGuard],
+    },
+    {
+        path: 'transfers', component: TransfersComponent , canActivate: [authGuard]
+    },
+    {
+        path: 'transfers-options', component: TransferOptionsComponent, canActivate: [authGuard]
     },
     {
         path: 'upload-documents', component: UploadDocumentsComponent, canActivate: [authGuard]

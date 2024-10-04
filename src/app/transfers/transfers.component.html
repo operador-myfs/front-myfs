@@ -1,0 +1,21 @@
+<div *ngIf="isLoading" class="loading-overlay">
+    <div class="spinner"></div>
+  </div>
+<div class="container mt-5">
+    <h1 class="text-center">Transfers</h1>
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <form [formGroup]="transferOperator" (ngSubmit)="transfer()">
+                <div class="form-group">
+                    <label for="transferType">Available operators</label>
+                    <select class="form-control mt-2" formControlName="operator" >
+                        <option *ngFor="let operator of operadores" [value]="operator.transferAPIURL">{{ operator.operatorName }}</option>
+                    </select>
+                </div>
+                <div class="text-center">
+                    <button type="submit" class="btn btn-primary mt-3" [disabled]="!transferOperator.valid">Transfer</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
