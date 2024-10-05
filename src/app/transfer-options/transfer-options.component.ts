@@ -12,19 +12,5 @@ import { TransferService } from '../transfers/transfer.service';
 })
 export class TransferOptionsComponent {
 
-  // transferService = inject(TransferService);
-  // operadores: any = [];
-
-
-  // cargarOperadores() {
-  //   this.obtenerOperadores();
-  // }
-
-  // obtenerOperadores() {
-  //   // this.isLoading = true;
-  //   this.transferService.obtenerOperadores().subscribe((data: any) => {
-  //     this.operadores = data.filter((operador: any) => operador.transferAPIURL);
-  //     console.log(this.operadores)
-  //   });
-  // }
+ 
 }

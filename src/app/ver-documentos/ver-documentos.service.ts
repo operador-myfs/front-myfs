@@ -36,4 +36,10 @@ export class VerDocumentosService {
     .set('Authorization', `Bearer ${idToken}`)
     return this.http.get<any>(this.environment.url + this.environment.documentsEndpoints.documents + '/' + key + '/url',{headers});
   }
+  signedDocument(key: string) {
+    const idToken = this.loginService.getIdToken() || '';
+    let headers =  new HttpHeaders()
+    .set('Authorization', `Bearer ${idToken}`)
+    return this.http.patch<any>(this.environment.url + this.environment.documentsEndpoints.documents + this.environment.documentsEndpoints.signed + '/'+ key , {headers});
+  }
 }

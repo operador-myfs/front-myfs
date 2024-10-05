@@ -2,7 +2,6 @@ import { Component, inject } from '@angular/core';
 import { VerDocumentosService } from './ver-documentos.service';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
-import { error } from 'console';
 
 @Component({
   selector: 'app-ver-documentos',
@@ -61,6 +60,9 @@ export class VerDocumentosComponent {
         this.getDocuments();
       }
       this.isLoading = false;
+    }, error => {
+      this.toastr.error('An error occurred while trying to delete the document');
+      this.isLoading = false;
     });
   }
   seeDocument(event:string){
@@ -70,6 +72,24 @@ export class VerDocumentosComponent {
         window.open(data.body,'_blank');
         this.isLoading = false;
       }
+    }, error => {
+      this.toastr.error('An error occurred while trying to see the document');
+      this.isLoading = false;
     })
+  }
+  signedDocument(event:string){
+    this.isLoading = true;
+    this.documentService.signedDocument(event).subscribe((data) => {
+      if(!data.error){
+        this.toastr.success('The document was signed successfully');
+        this.getDocuments();
+      }
+      this.isLoading = false;
+    }, error => {
+      this.toastr.error('An error occurred while trying to sign the document');
+      this.isLoading = false;
+    })  
+  
+
   }
 }

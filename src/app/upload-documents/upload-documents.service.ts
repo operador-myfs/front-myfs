@@ -15,10 +15,8 @@ export class UploadDocumentsService {
 
   uploadDocumets(file: any) {
     const idToken = this.loginService.getIdToken() || '';
-    const access_token = this.loginService.getAccessToken() || '';
     let headers =  new HttpHeaders()
     .set('Authorization', `Bearer ${idToken}`)
-    .set('IdToken', access_token);
     const body :FormData = new FormData();
     body.append('file', file);
     return this.http.post<any>(this.environment.url + this.environment.documentsEndpoints.documents,body, {headers});

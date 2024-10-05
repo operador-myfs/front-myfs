@@ -13,7 +13,7 @@ export class TransferService {
 
 
   obtenerOperadores() {
-    return this.httpClient.get(environment.govCarpeta.getOperators);
+    return this.httpClient.get(environment.url + environment.documentsEndpoints.operators);
   }
 
 }

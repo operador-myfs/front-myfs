@@ -1,9 +1,10 @@
 export const environment = {
-    url: 'http://localhost:8000/',
-    urlUsuarios: 'http://localhost:8080/',
+    url: 'https://ocrf9nzqde.execute-api.us-east-1.amazonaws.com/prod/documents/',
+    urlUsuarios: 'https://ocrf9nzqde.execute-api.us-east-1.amazonaws.com/prod/cognito/',
     documentsEndpoints: {
         documents: 'document',
         operators: 'operators',
+        signed: 'authenticate',
 
     },
     usuariosEndpoints: {
@@ -16,6 +17,6 @@ export const environment = {
 
     },
     govCarpeta: {
-        getOperators:'http://localhost:8000/operators'
+        getOperators:'operators'
     }
 }

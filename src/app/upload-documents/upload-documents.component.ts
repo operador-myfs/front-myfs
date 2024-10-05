@@ -33,6 +33,9 @@ export class UploadDocumentsComponent {
       this.isLoading = false;
       this.toastr.success('The document was uploaded successfully');
       this.router.navigate(['/documents']);
+    }, error=> {
+      this.isLoading = false;
+      this.toastr.error('An error occurred while uploading the document');
     });
   }
 

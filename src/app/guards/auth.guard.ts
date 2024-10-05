@@ -10,10 +10,9 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   return new Promise<boolean>((resolve) => {
     if (typeof window !== 'undefined') {
-      const token =
+      let token =
         loginService.getIdToken() || sessionStorage.getItem('idToken');
-    
-      if (token ) {
+      if (token) {
         loginService.setIdToken(token);
         loginService.setLoggedIn(true);
         resolve(true);
@@ -22,14 +21,18 @@ export const authGuard: CanActivateFn = (route, state) => {
           if (resp) {
             resolve(true);
           } else {
-            sessionStorage.removeItem('idToken');
+            if (sessionStorage.getItem('idToken')) {
+              sessionStorage.removeItem('idToken');
+            }
             router.navigate(['login']);
             resolve(false);
           }
         });
       }
     } else {
-      sessionStorage.removeItem('idToken');
+      if (sessionStorage.getItem('idToken')) {
+        sessionStorage.removeItem('idToken');
+      }
       router.navigate(['login']);
       resolve(false);
     }
