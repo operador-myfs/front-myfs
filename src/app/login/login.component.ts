@@ -57,6 +57,7 @@ export class LoginComponent {
         (error) => {
           if (error.error.status === 422) {
             this.router.navigate(['confirmation']);
+            this.toastr.info('You must confirm your email before logging in');
             this.isLoading = false;
           }
           if (error.error.status === 500) {
@@ -72,7 +73,6 @@ export class LoginComponent {
             this.toastr.error('We could not log you in, please try again');
           }
           this.isLoading = false;
-            this.toastr.error('We could not log you in, please try again');
         }
       );
     }
