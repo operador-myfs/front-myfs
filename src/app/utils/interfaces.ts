@@ -15,7 +15,5 @@ export interface ConfirmationEmail {
 }
 
 export interface DataTransfer {
-    citizenName: string | undefined | null;
-    citizenEmail: string | undefined | null;
     transferAPIURL: string | undefined | null;
 }   

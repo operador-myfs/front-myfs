@@ -9,6 +9,8 @@ import {
 } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { DataTransfer } from '../utils/interfaces';
+import { LoginService } from '../login/login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-transfers',
@@ -19,7 +21,8 @@ import { DataTransfer } from '../utils/interfaces';
 })
 export class TransfersComponent implements OnInit {
   private toastr = inject(ToastrService);
-
+  private router = inject(Router);
+  private loginService = inject(LoginService);
   operadores: any = [];
   transferService = inject(TransferService);
   isLoading: boolean = false;
@@ -50,15 +53,23 @@ export class TransfersComponent implements OnInit {
   transfer() {
     this.isLoading = true;
     const body: DataTransfer = {
-      citizenName: 'myfs',
-      citizenEmail: 'myfs@gmail.com',
       transferAPIURL: this.transferOperator.value.operator,
     };
     this.transferService.transferrence(body).subscribe(
       (data: any) => {
         this.isLoading = false;
         this.toastr.success('Transfer made successfully');
-        console.log(data);
+        this.loginService.setLoggedIn(false);
+        if (sessionStorage.getItem('userSession')) {
+          sessionStorage.removeItem('userSession');
+        }
+        if (sessionStorage.getItem('idToken')) {
+          sessionStorage.removeItem('idToken');
+        }
+        if (sessionStorage.getItem('access_token')) {
+          sessionStorage.removeItem('access_token');
+        }
+        this.router.navigate(['login']);
       },
       (error) => {
         this.isLoading = false;
