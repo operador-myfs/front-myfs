@@ -55,24 +55,24 @@ export class LoginComponent {
           this.isLoading = false;
         },
         (error) => {
-        
           if (error.error.status === 422) {
             this.router.navigate(['confirmation']);
             this.isLoading = false;
-
           }
           if (error.error.status === 500) {
             this.toastr.error('We could not log you in, please try again');
             this.isLoading = false;
-
           }
-          if(error.error.status === 400){
+          if (error.error.status === 400) {
             this.toastr.error('Invalid user credentials');
             this.isLoading = false;
-
+          }
+          if (error.error.status === 405) {
+            this.isLoading = false;
+            this.toastr.error('We could not log you in, please try again');
           }
           this.isLoading = false;
-          this.toastr.error('We could not log you in, please try again');
+            this.toastr.error('We could not log you in, please try again');
         }
       );
     }
