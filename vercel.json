@@ -1,12 +1,15 @@
 {
+    "public": true,
     "rewrites": [
-      {
-        "source": "/api/documents/:path*",
-        "destination": "https://ocrf9nzqde.execute-api.us-east-1.amazonaws.com/prod/documents/:path*"
-      },
-      {
-        "source": "/api/cognito/:path*",
-        "destination": "https://ocrf9nzqde.execute-api.us-east-1.amazonaws.com/prod/cognito/:path*"
-      }
+        {
+            "source": "/api/(.*)",
+            "destination": "/$1"
+        }
+    ],
+    "routes": [
+        {
+            "src": "/api/(.*)",
+            "dest": "https://ocrf9nzqde.execute-api.us-east-1.amazonaws.com/prod/$1"
+        }
     ]
-  }
+}
