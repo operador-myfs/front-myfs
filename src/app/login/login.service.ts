@@ -39,7 +39,7 @@ export class LoginService {
   }
   loginFirstTime(loginBody: DataLogin) {
     return this.http.post(
-      `${this.environment.urlUsuarios}${this.environment.usuariosEndpoints.usuarios}${this.environment.usuariosEndpoints.endpoints.login}`,
+      `/api/cognito/api/v1/users/login`,
       loginBody
     );
   }

@@ -55,6 +55,7 @@ export class LoginComponent {
           this.isLoading = false;
         },
         (error) => {
+        
           if (error.error.status === 422) {
             this.router.navigate(['confirmation']);
             this.isLoading = false;
@@ -70,6 +71,8 @@ export class LoginComponent {
             this.isLoading = false;
 
           }
+          this.isLoading = false;
+          this.toastr.error('We could not log you in, please try again');
         }
       );
     }
