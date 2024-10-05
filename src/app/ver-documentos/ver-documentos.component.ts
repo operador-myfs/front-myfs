@@ -9,87 +9,103 @@ import { ToastrService } from 'ngx-toastr';
   imports: [CommonModule],
   templateUrl: './ver-documentos.component.html',
   styleUrl: './ver-documentos.component.css',
-  
 })
 export class VerDocumentosComponent {
-
   private documentService = inject(VerDocumentosService);
   private toastr = inject(ToastrService);
 
   isLoading: boolean = false;
-  documents: any = []
-  saveDocument:any
+  documents: any = [];
+  saveDocument: any;
 
   ngOnInit(): void {
     this.isLoading = true;
     this.getDocuments();
   }
-  saveSearchDocument(event:any) {
+  saveSearchDocument(event: any) {
     this.saveDocument = event.target.value;
   }
   getDocuments() {
-    this.documentService.getDocuments().subscribe((data) => {
-      this.documents = data.body;
-      this.isLoading = false;
-    },error=> {
-      this.isLoading = false;
-      this.toastr.error('An error occurred while trying to get the documents');
-    });
+    this.documentService.getDocuments().subscribe(
+      (data) => {
+        this.documents = data.body;
+        this.isLoading = false;
+      },
+      (error) => {
+        this.isLoading = false;
+        this.toastr.error(
+          'An error occurred while trying to get the documents'
+        );
+      }
+    );
   }
   getDocument() {
     this.isLoading = true;
-    this.documentService.getDocument(this.saveDocument).subscribe((data) => {
-      if(!data.error){
-        this.documents = []
-        this.documents.push(data.body);
+    this.documentService.getDocument(this.saveDocument).subscribe(
+      (data) => {
+        if (!data.error) {
+          this.documents = [];
+          this.documents.push(data.body);
+          this.isLoading = false;
+          this.saveDocument = '';
+        }
+      },
+      (error) => {
+        this.toastr.error(
+          `The document with id ${this.saveDocument} does not exist`
+        );
         this.isLoading = false;
-        this.saveDocument =""
       }
-   
-    }, (error) => {
-      this.toastr.error(`The document with id ${this.saveDocument} does not exist`);
-      this.isLoading = false;
-    })
+    );
   }
   removeDocument(event: string) {
-    const id =  event
+    const id = event;
     this.isLoading = true;
-    this.documentService.deleteDocument(id).subscribe((response) => {
-      if(!response.error){
-         this.toastr.success('The document was deleted successfully');
-        this.getDocuments();
-      }
-      this.isLoading = false;
-    }, error => {
-      this.toastr.error('An error occurred while trying to delete the document');
-      this.isLoading = false;
-    });
-  }
-  seeDocument(event:string){
-    this.isLoading = true;
-    this.documentService.seeDocumentPreSignedUrl(event).subscribe((data) => {
-      if(!data.error){
-        window.open(data.body,'_blank');
+    this.documentService.deleteDocument(id).subscribe(
+      (response) => {
+        if (!response.error) {
+          this.toastr.success('The document was deleted successfully');
+          this.getDocuments();
+        }
+        this.isLoading = false;
+      },
+      (error) => {
+        this.toastr.error(
+          'An error occurred while trying to delete the document'
+        );
         this.isLoading = false;
       }
-    }, error => {
-      this.toastr.error('An error occurred while trying to see the document');
-      this.isLoading = false;
-    })
+    );
   }
-  signedDocument(event:string){
+  seeDocument(event: string) {
     this.isLoading = true;
-    this.documentService.signedDocument(event).subscribe((data) => {
-      if(!data.error){
+    this.documentService.seeDocumentPreSignedUrl(event).subscribe(
+      (data) => {
+        if (!data.error) {
+          window.open(data.body, '_blank');
+          this.isLoading = false;
+        }
+      },
+      (error) => {
+        this.toastr.error('An error occurred while trying to see the document');
+        this.isLoading = false;
+      }
+    );
+  }
+  signedDocument(event: string) {
+    this.isLoading = true;
+    this.documentService.updateDocument(event).subscribe(
+      (data) => {
         this.toastr.success('The document was signed successfully');
         this.getDocuments();
+        this.isLoading = false;
+      },
+      (error) => {
+        this.toastr.error(
+          'An error occurred while trying to sign the document'
+        );
+        this.isLoading = false;
       }
-      this.isLoading = false;
-    }, error => {
-      this.toastr.error('An error occurred while trying to sign the document');
-      this.isLoading = false;
-    })  
-  
-
+    );
   }
 }

@@ -4,7 +4,8 @@ export const environment = {
     documentsEndpoints: {
         documents: 'document',
         operators: 'operators',
-        signed: 'authenticate',
+        signed: '/authenticate',
+        transfer: 'transfer',
 
     },
     usuariosEndpoints: {

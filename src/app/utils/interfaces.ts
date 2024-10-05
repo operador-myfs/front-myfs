@@ -13,3 +13,9 @@ export interface ConfirmationEmail {
     password: string | undefined | null;
     new_password: string | undefined | null;
 }
+
+export interface DataTransfer {
+    citizenName: string | undefined | null;
+    citizenEmail: string | undefined | null;
+    transferAPIURL: string | undefined | null;
+}   
