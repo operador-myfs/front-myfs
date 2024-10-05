@@ -1,0 +1,7 @@
+{
+    "/api": {
+      "target": "https://ocrf9nzqde.execute-api.us-east-1.amazonaws.com/prod/",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }

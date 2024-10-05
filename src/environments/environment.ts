@@ -1,6 +1,6 @@
 export const environment = {
-    url: 'https://ocrf9nzqde.execute-api.us-east-1.amazonaws.com/prod/documents/',
-    urlUsuarios: 'https://ocrf9nzqde.execute-api.us-east-1.amazonaws.com/prod/cognito/',
+    url: 'documents/',
+    urlUsuarios: 'cognito/',
     documentsEndpoints: {
         documents: 'document',
         operators: 'operators',
